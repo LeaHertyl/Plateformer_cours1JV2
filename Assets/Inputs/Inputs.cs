@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Inputs/PlayerBehaviour.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Inputs/Inputs.inputactions'
 
 using System;
 using System.Collections;
@@ -6,38 +6,22 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @PlayerBehaviour : IInputActionCollection, IDisposable
+public class @Inputs : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @PlayerBehaviour()
+    public @Inputs()
     {
         asset = InputActionAsset.FromJson(@"{
-    ""name"": ""PlayerBehaviour"",
+    ""name"": ""Inputs"",
     ""maps"": [
         {
             ""name"": ""Player"",
-            ""id"": ""28baa0bd-6ec1-4a11-af46-4554306076dc"",
+            ""id"": ""e0c0d213-b365-4d93-8331-e5acc438575e"",
             ""actions"": [
                 {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
-                    ""id"": ""a45c5fe3-6cae-4017-a235-878e358f5d4c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""90ac3add-b4fb-4b68-b401-17e6d9f0ed97"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Shoot"",
-                    ""type"": ""Button"",
-                    ""id"": ""77513fe7-e39c-4f8a-a885-a2aab0d481cf"",
+                    ""id"": ""0e832f99-6d7a-4643-83be-810a9af32af7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -45,8 +29,19 @@ public class @PlayerBehaviour : IInputActionCollection, IDisposable
             ],
             ""bindings"": [
                 {
+                    ""name"": """",
+                    ""id"": ""3152f8e4-317f-49ef-a3ee-c9675b49c751"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""Arrows"",
-                    ""id"": ""b038f079-3dfb-4b7a-b376-bc15cf38f73b"",
+                    ""id"": ""666f4b37-02bf-49a6-8cde-793ff26c5db5"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -57,7 +52,7 @@ public class @PlayerBehaviour : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""09cf9c25-45b0-400f-b769-b75bc75dd563"",
+                    ""id"": ""b7e0a617-0333-47b8-82bd-d62e683bfb7b"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -68,7 +63,7 @@ public class @PlayerBehaviour : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""6b6703d9-5a9b-46ad-8005-11c7ed66603e"",
+                    ""id"": ""229050ef-1343-47a7-82e4-9dbcc64558c1"",
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -79,7 +74,7 @@ public class @PlayerBehaviour : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""005b6565-3da3-4b2d-bd63-25b1fd3d548b"",
+                    ""id"": ""eb539996-9a8b-4fdb-9646-eebce54ee924"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -90,7 +85,7 @@ public class @PlayerBehaviour : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""b1c6f0d5-d636-4a20-b724-404890f93a84"",
+                    ""id"": ""19ac68bc-8cd9-41e4-9a8a-ee0cfd808c15"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -98,50 +93,6 @@ public class @PlayerBehaviour : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5afa96ff-be0f-447e-99a2-2ad6434e6645"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9babb9e9-5b8f-4408-a94b-a0c0a3aa4faa"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b0fd02d9-1593-4117-ad16-d1aad14f8850"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""efb56cb1-bee7-4d32-862c-a9dbb9c59975"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Shoot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -151,8 +102,6 @@ public class @PlayerBehaviour : IInputActionCollection, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -203,15 +152,11 @@ public class @PlayerBehaviour : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Shoot;
     public struct PlayerActions
     {
-        private @PlayerBehaviour m_Wrapper;
-        public PlayerActions(@PlayerBehaviour wrapper) { m_Wrapper = wrapper; }
+        private @Inputs m_Wrapper;
+        public PlayerActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -224,12 +169,6 @@ public class @PlayerBehaviour : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -237,12 +176,6 @@ public class @PlayerBehaviour : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
-                @Shoot.started += instance.OnShoot;
-                @Shoot.performed += instance.OnShoot;
-                @Shoot.canceled += instance.OnShoot;
             }
         }
     }
@@ -250,7 +183,5 @@ public class @PlayerBehaviour : IInputActionCollection, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
-        void OnShoot(InputAction.CallbackContext context);
     }
 }
