@@ -12,6 +12,12 @@ public class PlayerBehaviour : MonoBehaviour
     private Inputs inputs;
     private Vector2 direction;
 
+    private bool IsOnGround = false;
+
+    private Animator myAnimator;
+    private Rigidbody2D myRigidbody2D;
+    private SpriteRenderer mySpriteRenderer;
+
 
     private void OnEnable()
     {
@@ -19,6 +25,10 @@ public class PlayerBehaviour : MonoBehaviour
         inputs.Enable();
         inputs.Player.Move.performed += OnMovePerformed;
         inputs.Player.Move.canceled += OnMoveCanceled;
+
+        myAnimator = GetComponent<Animator>();
+        myRigidbody2D = GetComponent<Rigidbody2D>();
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
 
     }
 
@@ -36,12 +46,31 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var myRigidbody = GetComponent<Rigidbody2D>();
-        direction.y = 0;
-        if(myRigidbody.velocity.sqrMagnitude < MaxSpeed)
+        var PlayerDirection = new Vector2(direction.x, 0);
+        if(myRigidbody2D.velocity.sqrMagnitude < MaxSpeed)
         {
-           myRigidbody.AddForce(direction * Speed);
+           myRigidbody2D.AddForce(direction * Speed);
         }
+
+        /*var isRunning = PlayerDirection.x != 0;
+        myAnimator.SetBool("IsRunning", isRunning);*/ 
+        //NEFONCTIONNEPAS
+        //ANIMATION DE COURSE NE SE LANCE PAS
+
+        if(direction.x < 0)
+        {
+            mySpriteRenderer.flipX = false;
+        }
+        else if (direction.x > 0)
+        {
+            mySpriteRenderer.flipX = true;
+        }
+
+        /*var IsAscending = !IsOnGround && myRigidbody2D.velocity.y > 0;
+        myAnimator.SetBool("IsJumping", IsAscending);
+        var IsDescending = !IsOnGround && myRigidbody2D.velocity.y > 0;
+        myAnimator.SetBool("IsFalling", IsDescending);
+        myAnimator.SetBool("IsGrounded", IsOnGround);*/
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
