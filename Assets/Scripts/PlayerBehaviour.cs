@@ -58,10 +58,8 @@ public class PlayerBehaviour : MonoBehaviour
            myRigidbody2D.AddForce(direction * Speed);
         }
 
-        /*var isRunning = PlayerDirection.x != 0;
-        myAnimator.SetBool("IsRunning", isRunning);*/
-        //NEFONCTIONNEPAS
-        //ANIMATION DE COURSE NE SE LANCE PAS
+        var isRunning = IsOnGround && direction.x != 0;
+        myAnimator.SetBool("IsRunning", isRunning);
 
         if(direction.x < 0)
         {
@@ -72,13 +70,14 @@ public class PlayerBehaviour : MonoBehaviour
             mySpriteRenderer.flipX = true;
         }
 
-        
 
-        /*var IsAscending = !IsOnGround && myRigidbody2D.velocity.y > 0;
-        myAnimator.SetBool("IsJumping", IsAscending);
-        var IsDescending = !IsOnGround && myRigidbody2D.velocity.y > 0;
-        myAnimator.SetBool("IsFalling", IsDescending);
-        myAnimator.SetBool("IsGrounded", IsOnGround);*/
+
+        var isJumping = IsOnGround == false && myRigidbody2D.velocity.y > 0;
+        myAnimator.SetBool("IsAscending", isJumping);
+
+        var isFalling = IsOnGround == false && myRigidbody2D.velocity.y < 0;
+        myAnimator.SetBool("IsDescending", isFalling);
+        myAnimator.SetBool("IsStanding", IsOnGround);
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
