@@ -109,7 +109,7 @@ public class PlayerBehaviour : MonoBehaviour
         var touchGround = ground == (ground | (1 << other.gameObject.layer));
         // Booléen vérifiant que l'on collisionne avec une surface horizontale*/
         var touchFromAbove = other.contacts[0].normal == Vector2.up;
-        if (other.gameObject.CompareTag("Ground") == true) //&& touchFromAbove == true)
+        if (other.gameObject.CompareTag("Ground") == true) //&& touchFromAbove)
         {
             IsOnGround = true;
         }
