@@ -14,7 +14,7 @@ TagManager:
   - UI
   - 
   - 
-  - ground
+  - 
   - 
   - 
   - 
@@ -41,4 +41,25 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: ground
+    uniqueID: 2004484749
+    locked: 0
+  - name: player
+    uniqueID: 1400316847
+    locked: 0
+  - name: particule
+    uniqueID: 3009755821
+    locked: 0
+  - name: fleche
+    uniqueID: 2345241303
+    locked: 0
+  - name: eau
+    uniqueID: 2481918891
+    locked: 0
+  - name: arbres
+    uniqueID: 1630528563
+    locked: 0
+  - name: decor
+    uniqueID: 3679503313
     locked: 0
