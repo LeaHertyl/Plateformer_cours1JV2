@@ -57,3 +57,9 @@ TagManager:
   - name: eau
     uniqueID: 2481918891
     locked: 0
+  - name: arbres
+    uniqueID: 1630528563
+    locked: 0
+  - name: decor
+    uniqueID: 3679503313
+    locked: 0

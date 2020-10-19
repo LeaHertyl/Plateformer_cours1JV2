@@ -58,9 +58,6 @@ public class PlayerBehaviour : MonoBehaviour
            myRigidbody2D.AddForce(direction * Speed);
         }
 
-        var isRunning = IsOnGround && direction.x != 0;
-        myAnimator.SetBool("IsRunning", isRunning);
-
         if(direction.x < 0)
         {
             mySpriteRenderer.flipX = false;
@@ -70,7 +67,8 @@ public class PlayerBehaviour : MonoBehaviour
             mySpriteRenderer.flipX = true;
         }
 
-
+        var isRunning = IsOnGround && direction.x != 0;
+        myAnimator.SetBool("IsRunning", isRunning);
 
         var isJumping = IsOnGround == false && myRigidbody2D.velocity.y > 0;
         myAnimator.SetBool("IsAscending", isJumping);
@@ -107,8 +105,8 @@ public class PlayerBehaviour : MonoBehaviour
         /*// Booléen vérifiant si le layer sur lequel on a atteri appartient bien au layerMask "ground"
         var touchGround = ground == (ground | (1 << other.gameObject.layer));
         // Booléen vérifiant que l'on collisionne avec une surface horizontale*/
-        var touchFromAbove = other.contacts[0].normal == Vector2.up;
-        if (other.gameObject.CompareTag("Ground") == true) //&& touchFromAbove)
+        //var touchFromAbove = other.contacts[0].normal == Vector2.up;
+        if (other.gameObject.CompareTag("Ground") == true && other.contacts[0].normal == Vector2.up)
         {
             IsOnGround = true;
         }
