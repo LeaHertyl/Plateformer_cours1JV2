@@ -5,13 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
-    public void playBouton()
+    public void playBouton() //fonction publique pour pouvoir la sélectionner dans l'evenement OnClick des boutons
     {
-        Debug.Log("playscene");
+        Debug.Log("playscene"); //Code de débug pour voir si le bouton réagit bien.
         SceneManager.LoadScene("SampleScene");//Charge la scène du jeu
     }
 
-    //Fonction pour le bouton "Crédits"
     public void creditsBouton()
     {
         Debug.Log("creditscene");
@@ -21,13 +20,12 @@ public class MenuScript : MonoBehaviour
     public void menuScene()
     {
         Debug.Log("menuScene");
-        SceneManager.LoadScene("MenuScene");
+        SceneManager.LoadScene("MenuScene"); //charge la scene du menu
     }
 
-    //Fonction pour le bouton "Quitter"
     public void quitBouton()
     {
-        Debug.Log("Ferme le jeu");//Code de débug pour voir si le bouton réagit bien.
+        Debug.Log("Ferme le jeu");
         //Application.Quit();//Ferme et Arrête l'application
     }
 }
