@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -117,5 +116,6 @@ public class PlayerBehaviour : MonoBehaviour
     private void GameOver()
     {
         Destroy(gameObject);
+        SceneManager.LoadScene("SampleScene");
     }
 }
