@@ -18,7 +18,7 @@ public class Collectibles : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Score.text = "Score : " + ScoreValue;
+        //Score.text = "Score : " + ScoreValue;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
