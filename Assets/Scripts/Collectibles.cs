@@ -18,7 +18,7 @@ public class Collectibles : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Score.text = "Score : " + ScoreValue;
+        Score.text = "Mouches collectées : " + ScoreValue;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -27,6 +27,7 @@ public class Collectibles : MonoBehaviour
         {
             Debug.Log("youpi");
             Destroy(other.gameObject);
+            ScoreValue++;
         }
         
     }
