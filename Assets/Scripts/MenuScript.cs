@@ -8,20 +8,20 @@ public class MenuScript : MonoBehaviour
     public void playBouton()
     {
         Debug.Log("playscene");
-        //SceneManager.LoadScene("SampleScene");//Charge la scène du jeu
+        SceneManager.LoadScene("SampleScene");//Charge la scène du jeu
     }
 
     //Fonction pour le bouton "Crédits"
     public void creditsBouton()
     {
         Debug.Log("creditscene");
-        //SceneManager.LoadScene("Credits");//Charge la scène de crédits
+        SceneManager.LoadScene("Credits");//Charge la scène de crédits
     }
 
     public void menuScene()
     {
         Debug.Log("menuScene");
-        //SceneManager.LoadScene("MenuScene");
+        SceneManager.LoadScene("MenuScene");
     }
 
     //Fonction pour le bouton "Quitter"

@@ -116,6 +116,6 @@ public class PlayerBehaviour : MonoBehaviour
     private void GameOver()
     {
         Destroy(gameObject);
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("GameOverScene");
     }
 }
