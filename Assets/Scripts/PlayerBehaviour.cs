@@ -123,6 +123,12 @@ public class PlayerBehaviour : MonoBehaviour
             Debug.Log("kill");
             GameOver();
         }
+
+        if(other.gameObject.CompareTag("Level2Launcher"))
+        {
+            Debug.Log("level2");
+            SceneManager.LoadScene("Level2", LoadSceneMode.Single);
+        }
     }
 
     private void GameOver()
