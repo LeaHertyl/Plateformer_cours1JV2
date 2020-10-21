@@ -207,14 +207,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1594833325}
         m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
-        m_MethodName: playBouton
-        m_Mode: 1
+        m_MethodName: ChargementBeforeScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: SampleScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &30647308
@@ -854,14 +854,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1594833325}
         m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
-        m_MethodName: creditsBouton
-        m_Mode: 1
+        m_MethodName: ChargementBeforeScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Credits
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1417853225
@@ -1032,6 +1032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfca550ce06bf2e4d8f201e5d8779df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Loading_Screen: {fileID: 479592596150600766, guid: d981be91c66585c4ea48b2624611c431, type: 3}
 --- !u!4 &1594833326
 Transform:
   m_ObjectHideFlags: 0
