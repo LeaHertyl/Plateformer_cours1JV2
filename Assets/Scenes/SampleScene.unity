@@ -5090,7 +5090,7 @@ PrefabInstance:
       objectReference: {fileID: 73814114}
     - target: {fileID: 3804411205309397131, guid: 151da28be11e6fb4ea16d3f0ec8b4508, type: 3}
       propertyPath: NbCollectiblesScene
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3804411205309397131, guid: 151da28be11e6fb4ea16d3f0ec8b4508, type: 3}
       propertyPath: CanvasWin
