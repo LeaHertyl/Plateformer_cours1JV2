@@ -7,6 +7,10 @@ using TMPro;
 public class Collectibles : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI Score; //pour pouvoir appeler le textMesh qui va afficher le score dans l'inspector
+    [SerializeField] private int NbCollectiblesScene; //pour pouvoir modifier la valeur de NbCollectiblesScene dans l'inspector
+
+    [SerializeField] private GameObject CanvasWin; //pour pouvoir indiquer quel game object correspond à CanvasWin dans l'inspector
+
     private int ScoreValue; //nombre entier -> le nombre de collectibles ramasses
 
     // Start is called before the first frame update
@@ -18,7 +22,7 @@ public class Collectibles : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Score.text = "Mouches collectées : " + ScoreValue; //à chaque frame on met à jour le nombre affiche de collectibles ramasses
+        Score.text = "Mouches collectées : " + ScoreValue + "/" + NbCollectiblesScene ; //à chaque frame on met à jour le nombre affiche de collectibles ramasses
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -29,6 +33,16 @@ public class Collectibles : MonoBehaviour
             Destroy(other.gameObject); //on détruit le gameobjet avec lequel le player a trigger
             ScoreValue++; //on ajoute 1 au score affiché à chaque fois que le player trigger un gameobject dont le tag est "FlyCollectible"
         }
+
+        AllFlies();
         
+    }
+
+    private void AllFlies()
+    {
+        if(ScoreValue == NbCollectiblesScene)
+        {
+            Instantiate(CanvasWin);
+        }
     }
 }
