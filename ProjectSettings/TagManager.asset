@@ -69,3 +69,6 @@ TagManager:
   - name: collectibles
     uniqueID: 66926733
     locked: 0
+  - name: projectile
+    uniqueID: 334837139
+    locked: 0

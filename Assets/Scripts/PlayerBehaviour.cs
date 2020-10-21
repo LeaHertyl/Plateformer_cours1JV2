@@ -11,6 +11,10 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float MaxSpeed; //pour pouvoir modifier la valeur de MaxSpeed dans l'inspector
     [SerializeField] private float JumpForce; //pour pouvoir modifier la valeur de JumpForce  dans l'inspector
 
+    [SerializeField] private GameObject projectile; //pour pouvoir indiquer quel gameobject correspond à projectile dans l'inspector 
+
+    public GameObject NopeCanvas;
+
     private Inputs inputs; //on cree une variable inputs de type Inputs
     private Vector2 direction; //on cree une variable direction de type Vector2
 
@@ -18,7 +22,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     private Animator myAnimator; // on cree une variable pour l'animation du personnage
     private Rigidbody2D myRigidbody2D; //on cree une variable de type Rigidbody2D pour pouvoir agir ensuite sur celui du player
-    private SpriteRenderer mySpriteRenderer; // on cree une variable pour modifier le sprite qui va etre affiché pendant les animations
+    
+    public SpriteRenderer mySpriteRenderer; // on cree une variable pour modifier le sprite qui va etre affiché pendant les animations
+
+    public Vector2 VecteurVisee; //on cree une variable publique pour pouvoir y acceder depuis un autre script
+
+    private int Scorevalue;
+    private int Nbcollectibles;
 
     private void OnEnable()
     {
@@ -31,6 +41,8 @@ public class PlayerBehaviour : MonoBehaviour
         inputs.Player.Move.canceled += OnMoveCanceled; //quand on arrête d'appuyer sur les inputs de l'action Move de l'action Map player, on lance la fonction OnMoveCanceled
 
         inputs.Player.Jump.performed += OnJumpPerformed; //quand on appuie sur les inputs de l'action Jump de l'action Map player, on lance la fonction OnJumpPerformed
+
+        inputs.Player.Shoot.performed += OnShootPerformed; //quand on appuie sur les inputs de l'action Shoot de l'action Map player, on lance la fonction OnShootPerformed
 
         myAnimator = GetComponent<Animator>(); //on recupere le composant Animator du Player
         myRigidbody2D = GetComponent<Rigidbody2D>(); // on recupere le composant Rigidbody2D du Player
@@ -47,7 +59,11 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        var PlayerGameObject = GameObject.FindWithTag("Player");
+        var CollectiblesScript = PlayerGameObject.GetComponent<Collectibles>();
+
+        Scorevalue = CollectiblesScript.ScoreValue;
+        Nbcollectibles = CollectiblesScript.NbCollectiblesScene;
     }
 
     /// <summary>
@@ -55,7 +71,8 @@ public class PlayerBehaviour : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        var PlayerDirection = new Vector2(direction.x, 0);
+        var PlayerDirection = new Vector2(transform.position.x, transform.position.y);
+        VecteurVisee = PlayerDirection;
 
         //Tant que la vitesse de déplacement du player n'est pas superieure à maxSpeed, on lui ajoute une force en fonction des inputs enclenchés
         if (myRigidbody2D.velocity.sqrMagnitude < MaxSpeed)
@@ -109,6 +126,11 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    private void OnShootPerformed(InputAction.CallbackContext obj)
+    {
+        Instantiate(projectile, transform.position, Quaternion.identity);
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         //si le Player collisionne avec un GameObject qui a le tag "Ground" le booléen IsOnGround passe en true pour que le Player puisse sauter
@@ -124,12 +146,18 @@ public class PlayerBehaviour : MonoBehaviour
             GameOver();
         }
 
-        if(other.gameObject.CompareTag("Level2Launcher"))
+        if(other.gameObject.CompareTag("Level2Launcher") && Scorevalue == Nbcollectibles) 
         {
             Debug.Log("level2");
             SceneManager.LoadScene("Level2", LoadSceneMode.Single);
+            NopeCanvas.SetActive(false);
+        }
+        else if(other.gameObject.CompareTag("Level2Launcher") && Scorevalue != Nbcollectibles)
+        {
+            NopeCanvas.SetActive(true);
         }
     }
+
 
     private void GameOver()
     {
