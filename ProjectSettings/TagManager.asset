@@ -72,3 +72,6 @@ TagManager:
   - name: projectile
     uniqueID: 334837139
     locked: 0
+  - name: portals
+    uniqueID: 1209626015
+    locked: 0
