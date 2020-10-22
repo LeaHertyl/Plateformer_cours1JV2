@@ -11,13 +11,13 @@ public class MenuScript : MonoBehaviour
     public void playBouton() //fonction publique pour pouvoir la sélectionner dans l'evenement OnClick des boutons
     {
         Debug.Log("playscene"); //Code de débug pour voir si le bouton réagit bien.
-        SceneManager.LoadScene("SampleScene");//Charge la scène du jeu
+        SceneManager.LoadScene("SampleScene"); //Charge la scène du jeu
     }
 
     public void creditsBouton()
     {
         Debug.Log("creditscene");
-        SceneManager.LoadScene("Credits");//Charge la scène de crédits
+        SceneManager.LoadScene("Credits"); //Charge la scène de crédits
     }
 
     public void menuScene()
@@ -46,8 +46,8 @@ public class MenuScript : MonoBehaviour
         
         var loading = SceneManager.LoadSceneAsync(SceneToLoad); //permet de charger a scene en arriere plan pendant l'animation
 
-        loadingAnimator.SetBool("EndLoading", true);
-        var animationtime = loadingAnimator.GetCurrentAnimatorStateInfo(0).length;
+        loadingAnimator.SetBool("EndLoading", true); //on fait passer le booleen de condition de lancement de la 2e animation a true
+        var animationtime = loadingAnimator.GetCurrentAnimatorStateInfo(0).length; //on recalcule le temps de l'animation
 
         loading.allowSceneActivation = false;  // cela descative le canvas où se trouve l'animation
 

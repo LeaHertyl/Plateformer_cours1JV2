@@ -40,6 +40,7 @@ public class ProjectileScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        //si le projectile trigger un gameobject dont le tag est Ground, il est detruit
         if(other.gameObject.CompareTag("Ground"))
         {
             Debug.Log("Destroyprojectile");
