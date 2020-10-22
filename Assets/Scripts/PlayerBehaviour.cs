@@ -11,6 +11,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float Speed; //pour pouvoir modifier la valeur de speed dans l'inspector
     [SerializeField] private float MaxSpeed; //pour pouvoir modifier la valeur de MaxSpeed dans l'inspector
     [SerializeField] private float JumpForce; //pour pouvoir modifier la valeur de JumpForce  dans l'inspector
+    [SerializeField] private float DownForce; //pour pouvoir modifier la valeur de DownForce dans l'inspector (doit etre un nombre negatif)
 
     [SerializeField] private GameObject projectile; //pour pouvoir indiquer quel gameobject correspond à projectile dans l'inspector 
 
@@ -106,6 +107,11 @@ public class PlayerBehaviour : MonoBehaviour
         var isFalling = IsOnGround == false && myRigidbody2D.velocity.y < 0;
         myAnimator.SetBool("IsDescending", isFalling);
         myAnimator.SetBool("IsStanding", IsOnGround);
+
+        if(myRigidbody2D.velocity.y < 0)
+        {
+            myRigidbody2D.AddForce(transform.up * DownForce);
+        }
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)

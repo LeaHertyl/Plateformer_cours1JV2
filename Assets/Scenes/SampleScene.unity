@@ -5131,6 +5131,10 @@ PrefabInstance:
       propertyPath: LightPerso
       value: 
       objectReference: {fileID: 1542766372}
+    - target: {fileID: 5549291660717415812, guid: 151da28be11e6fb4ea16d3f0ec8b4508, type: 3}
+      propertyPath: DownForce
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 5549291660717415813, guid: 151da28be11e6fb4ea16d3f0ec8b4508, type: 3}
       propertyPath: m_SortingOrder
       value: 6
