@@ -12,10 +12,11 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float MaxSpeed; //pour pouvoir modifier la valeur de MaxSpeed dans l'inspector
     [SerializeField] private float JumpForce; //pour pouvoir modifier la valeur de JumpForce  dans l'inspector
     [SerializeField] private float DownForce; //pour pouvoir modifier la valeur de DownForce dans l'inspector (doit etre un nombre negatif)
+    [SerializeField] private float ForceCourant; // pour pouvoir modifier la valeur de ForceCourant dans l'inspector
 
     [SerializeField] private GameObject projectile; //pour pouvoir indiquer quel gameobject correspond à projectile dans l'inspector 
 
-    public GameObject NopeCanvas; //pour pouvoir indiquer dans l'inspector quel gameobject correspond au NopeCanvas et y acceder depuis un autre script
+    [HideInInspector] public GameObject NopeCanvas; //pour pouvoir indiquer dans l'inspector quel gameobject correspond au NopeCanvas et y acceder depuis un autre script
 
     private Inputs inputs; //on cree une variable inputs de type Inputs
     private Vector2 direction; //on cree une variable direction de type Vector2
@@ -24,10 +25,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     private Animator myAnimator; // on cree une variable pour l'animation du personnage
     private Rigidbody2D myRigidbody2D; //on cree une variable de type Rigidbody2D pour pouvoir agir ensuite sur celui du player
-    
-    public SpriteRenderer mySpriteRenderer; // on cree une variable pour modifier le sprite qui va etre affiché pendant les animations, publique pouvoir y acceder depuis un autre script
 
-    public Vector2 VecteurVisee; //on cree une variable publique pour pouvoir y acceder depuis un autre script
+    [HideInInspector] public SpriteRenderer mySpriteRenderer; // on cree une variable pour modifier le sprite qui va etre affiché pendant les animations, publique pouvoir y acceder depuis un autre script
+
+    [HideInInspector] public Vector2 VecteurVisee; //on cree une variable publique pour pouvoir y acceder depuis un autre script
 
     private int Scorevalue;
     private int Nbcollectibles;
@@ -179,14 +180,16 @@ public class PlayerBehaviour : MonoBehaviour
             NopeCanvas.SetActive(true); //si on essaye d'acceder au niveau 3 et que tous les collectibles ne sont pas ramasses, on active le NopeCanvas
         }
 
-        if (other.gameObject.CompareTag("Fin") && Scorevalue != Nbcollectibles)
+        if (other.gameObject.CompareTag("Level4Launcher") && Scorevalue == Nbcollectibles)
         {
-            NopeCanvas.SetActive(true); 
-        }
-        else if (other.gameObject.CompareTag("Fin") && Scorevalue == Nbcollectibles)
-        {
+            SceneManager.LoadScene("Level4", LoadSceneMode.Single); //si il a tout ramasse, quand il collisionne avec l'objet dont le tag est Level3Launcher, on lance le niveau 3
             NopeCanvas.SetActive(false);
         }
+        else if (other.gameObject.CompareTag("Level4Launcher") && Scorevalue != Nbcollectibles)
+        {
+            NopeCanvas.SetActive(true);
+        }
+
     }
 
 
@@ -195,4 +198,18 @@ public class PlayerBehaviour : MonoBehaviour
         Destroy(gameObject); //on détruit le gameobject sur lequel le scrip est placé
         SceneManager.LoadScene("GameOverScene"); //on charge et lance la scene qui s'appelle GameOverScene
     }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("CourantUp"))
+        {
+            myRigidbody2D.AddForce(Vector2.up * ForceCourant, ForceMode2D.Impulse);
+        }
+
+        if (other.gameObject.CompareTag("CourantDown"))
+        {
+            myRigidbody2D.AddForce(Vector2.up * - ForceCourant, ForceMode2D.Impulse);
+        }
+    }
+
 }

@@ -9,8 +9,9 @@ public class Collectibles : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Score; //pour pouvoir appeler le textMesh qui va afficher le score dans l'inspector
     [SerializeField] private GameObject CanvasWin; //pour pouvoir indiquer quel gameobject correspond à CanvasWin dans l'inspector
 
-    public int NbCollectiblesScene; //pour pouvoir modifier la valeur de NbCollectiblesScene dans l'inspectoret y acceder depuis d'autres scripts
-    public int ScoreValue; //nombre entier -> le nombre de collectibles ramasses
+    public int NbCollectiblesScene; //pour pouvoir modifier la valeur de NbCollectiblesScene dans l'inspector et y acceder depuis d'autres scripts
+
+    [HideInInspector] public int ScoreValue; //nombre entier -> le nombre de collectibles ramasses
 
     private GameObject NopeCanvasToDestroy; //on cree une variable qui s'appelle NopeCanvasToDestroy de type GameObject
 
