@@ -12,6 +12,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float MaxSpeed; //pour pouvoir modifier la valeur de MaxSpeed dans l'inspector
     [SerializeField] private float JumpForce; //pour pouvoir modifier la valeur de JumpForce  dans l'inspector
     [SerializeField] private float DownForce; //pour pouvoir modifier la valeur de DownForce dans l'inspector (doit etre un nombre negatif)
+    [SerializeField] private float ForceCourant; // pour pouvoir modifier la valeur de ForceCourant dans l'inspector
 
     [SerializeField] private GameObject projectile; //pour pouvoir indiquer quel gameobject correspond à projectile dans l'inspector 
 
@@ -24,13 +25,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     private Animator myAnimator; // on cree une variable pour l'animation du personnage
     private Rigidbody2D myRigidbody2D; //on cree une variable de type Rigidbody2D pour pouvoir agir ensuite sur celui du player
-    
-    public SpriteRenderer mySpriteRenderer; // on cree une variable pour modifier le sprite qui va etre affiché pendant les animations, publique pouvoir y acceder depuis un autre script
 
-    public Vector2 VecteurVisee; //on cree une variable publique pour pouvoir y acceder depuis un autre script
+    [HideInInspector] public SpriteRenderer mySpriteRenderer; // on cree une variable pour modifier le sprite qui va etre affiché pendant les animations, publique pouvoir y acceder depuis un autre script
 
-    private int Scorevalue;
-    private int Nbcollectibles;
+    [HideInInspector] public Vector2 VecteurVisee; //on cree une variable publique pour pouvoir y acceder depuis un autre script
+
+    private int Scorevalue; //on cree une variable ScoreValue qui correspond a un nombre entier
+    private int Nbcollectibles; //on cree une variable Nbcollectibles qui correspond a un nombre entier
 
     private void OnEnable()
     {
@@ -108,6 +109,7 @@ public class PlayerBehaviour : MonoBehaviour
         myAnimator.SetBool("IsDescending", isFalling);
         myAnimator.SetBool("IsStanding", IsOnGround);
 
+        //si le personnage est en train de tomber, on lui rajoue une force sur l'axe y pour qu'il tombe plus vite
         if(myRigidbody2D.velocity.y < 0)
         {
             myRigidbody2D.AddForce(transform.up * DownForce);
@@ -156,7 +158,7 @@ public class PlayerBehaviour : MonoBehaviour
             GameOver();
         }
 
-        //on fait en sorte que le personne ne puisse pas passer au niveau superieur s'il n'a pas ramasse tous les collectibles de la scene
+        //on fait en sorte que le personnage ne puisse pas passer au niveau superieur s'il n'a pas ramasse tous les collectibles de la scene
         if(other.gameObject.CompareTag("Level2Launcher") && Scorevalue == Nbcollectibles) 
         {
             //Debug.Log("level2");
@@ -168,7 +170,7 @@ public class PlayerBehaviour : MonoBehaviour
             NopeCanvas.SetActive(true); //si on essaye d'acceder au niveau 2 et que tous les collectibles ne sont pas ramasses, on active le NopeCanvas
         }
 
-        //on fait en sorte que le personne ne puisse pas passer au niveau superieur s'il n'a pas ramasse tous les collectibles de la scene
+        //on fait en sorte que le personnage ne puisse pas passer au niveau superieur s'il n'a pas ramasse tous les collectibles de la scene
         if (other.gameObject.CompareTag("Level3Launcher") && Scorevalue == Nbcollectibles)
         {
             SceneManager.LoadScene("Level3", LoadSceneMode.Single); //si il a tout ramasse, quand il collisionne avec l'objet dont le tag est Level3Launcher, on lance le niveau 3
@@ -178,6 +180,24 @@ public class PlayerBehaviour : MonoBehaviour
         {
             NopeCanvas.SetActive(true); //si on essaye d'acceder au niveau 3 et que tous les collectibles ne sont pas ramasses, on active le NopeCanvas
         }
+
+        if (other.gameObject.CompareTag("Level4Launcher") && Scorevalue == Nbcollectibles)
+        {
+            SceneManager.LoadScene("Level4", LoadSceneMode.Single); //si il a tout ramasse, quand il collisionne avec l'objet dont le tag est Level3Launcher, on lance le niveau 3
+            NopeCanvas.SetActive(false); //on desactive le NopeCanvas
+        }
+        else if (other.gameObject.CompareTag("Level4Launcher") && Scorevalue != Nbcollectibles)
+        {
+            NopeCanvas.SetActive(true); //si on essaye d'acceder au niveau 4 et que tous les collectibles ne sont pas ramasses, on active le NopeCanvas
+        }
+
+        //si le personnage n'a pas ramasse tous les collectibles de la scene, on active le NopeCanvas et on relance la scene
+        if (other.gameObject.CompareTag("Fin") && Scorevalue != Nbcollectibles)
+        {
+            NopeCanvas.SetActive(true);
+            SceneManager.LoadScene("Level4", LoadSceneMode.Single);
+        }
+
     }
 
 
@@ -186,4 +206,24 @@ public class PlayerBehaviour : MonoBehaviour
         Destroy(gameObject); //on détruit le gameobject sur lequel le scrip est placé
         SceneManager.LoadScene("GameOverScene"); //on charge et lance la scene qui s'appelle GameOverScene
     }
+
+    /// <summary>
+    /// On utilise la fonction OnTriggerStay au lieu d'OnTriggerEnter pour que ce qui se passe dans la fonction s'effectue tant que le personnage trigger la zone definie
+    /// et que ça ne se lance pas uniquement quand il la rencontre la première fois
+    /// </summary>
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        //si le personnage trigger le gameObject dont le tag est "CourantUp", on lui ajoute une force de valeur ForceCourant pour le faire monter
+        if (other.gameObject.CompareTag("CourantUp"))
+        {
+            myRigidbody2D.AddForce(Vector2.up * ForceCourant, ForceMode2D.Impulse);
+        }
+
+        //si le personnage trigger le gameObject dont le tag est "CourantDown", on lui ajoute une force de valeur - ForceCourant pour le faire descendre
+        if (other.gameObject.CompareTag("CourantDown"))
+        {
+            myRigidbody2D.AddForce(Vector2.up * - ForceCourant, ForceMode2D.Impulse);
+        }
+    }
+
 }

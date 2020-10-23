@@ -9,6 +9,10 @@ TagManager:
   - FlyCollectible
   - Level2Launcher
   - Level3Launcher
+  - Fin
+  - Level4Launcher
+  - CourantDown
+  - CourantUp
   layers:
   - Default
   - TransparentFX
@@ -49,9 +53,6 @@ TagManager:
   - name: ground
     uniqueID: 2004484749
     locked: 0
-  - name: player
-    uniqueID: 1400316847
-    locked: 0
   - name: particule
     uniqueID: 3009755821
     locked: 0
@@ -75,4 +76,10 @@ TagManager:
     locked: 0
   - name: portals
     uniqueID: 1209626015
+    locked: 0
+  - name: courant
+    uniqueID: 2644386443
+    locked: 0
+  - name: player
+    uniqueID: 1400316847
     locked: 0
