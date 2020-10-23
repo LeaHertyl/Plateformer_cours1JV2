@@ -9118,6 +9118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NopeCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6763935213250523787, guid: 68e26337c35fc634f9ef48a94ba3b419, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6895501019321659917, guid: 68e26337c35fc634f9ef48a94ba3b419, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
