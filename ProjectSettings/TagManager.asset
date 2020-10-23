@@ -9,6 +9,7 @@ TagManager:
   - FlyCollectible
   - Level2Launcher
   - Level3Launcher
+  - Fin
   layers:
   - Default
   - TransparentFX

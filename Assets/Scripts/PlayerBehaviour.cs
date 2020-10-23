@@ -178,6 +178,15 @@ public class PlayerBehaviour : MonoBehaviour
         {
             NopeCanvas.SetActive(true); //si on essaye d'acceder au niveau 3 et que tous les collectibles ne sont pas ramasses, on active le NopeCanvas
         }
+
+        if (other.gameObject.CompareTag("Fin") && Scorevalue != Nbcollectibles)
+        {
+            NopeCanvas.SetActive(true); 
+        }
+        else if (other.gameObject.CompareTag("Fin") && Scorevalue == Nbcollectibles)
+        {
+            NopeCanvas.SetActive(false);
+        }
     }
 
 
