@@ -6067,6 +6067,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2305292487527121193, guid: f610f54118b5c0347924f4c3dd28fbca, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3876870231752086236, guid: f610f54118b5c0347924f4c3dd28fbca, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.63
@@ -6137,6 +6141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3876870231752086239, guid: f610f54118b5c0347924f4c3dd28fbca, type: 3}
+    - {fileID: 2305292487527121193, guid: f610f54118b5c0347924f4c3dd28fbca, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f610f54118b5c0347924f4c3dd28fbca, type: 3}
 --- !u!1 &395435313
 GameObject:
@@ -8669,7 +8674,7 @@ PolygonCollider2D:
       - {x: -8.990445, y: -2.0908434}
       - {x: 5.019658, y: -1.9599013}
       - {x: 16.811134, y: -3.729558}
-      - {x: 24.976524, y: -6.797737}
+      - {x: 21.90083, y: -7.662776}
       - {x: 26.275208, y: -13.819493}
       - {x: 48.47353, y: -12.499291}
       - {x: 48.26975, y: 1.7465827}
