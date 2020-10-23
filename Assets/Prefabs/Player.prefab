@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3804411205309397131}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,6 +150,8 @@ MonoBehaviour:
   Speed: 400
   MaxSpeed: 70
   JumpForce: 100
+  projectile: {fileID: 0}
+  VecteurVisee: {x: 0, y: 0}
 --- !u!95 &5549291660717415814
 Animator:
   serializedVersion: 3
@@ -181,6 +183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bc5d6d163e99024995f5a4a8e40ea6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Score: {fileID: 0}
+  NbCollectiblesScene: 0
+  CanvasWin: {fileID: 0}
 --- !u!1 &5549291661476295231
 GameObject:
   m_ObjectHideFlags: 0

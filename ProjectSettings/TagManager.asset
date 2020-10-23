@@ -8,6 +8,7 @@ TagManager:
   - DeathZone
   - FlyCollectible
   - Level2Launcher
+  - Level3Launcher
   layers:
   - Default
   - TransparentFX
@@ -68,4 +69,10 @@ TagManager:
     locked: 0
   - name: collectibles
     uniqueID: 66926733
+    locked: 0
+  - name: projectile
+    uniqueID: 334837139
+    locked: 0
+  - name: portals
+    uniqueID: 1209626015
     locked: 0

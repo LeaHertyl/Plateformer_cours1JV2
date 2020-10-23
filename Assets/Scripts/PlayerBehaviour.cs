@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,11 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float Speed; //pour pouvoir modifier la valeur de speed dans l'inspector
     [SerializeField] private float MaxSpeed; //pour pouvoir modifier la valeur de MaxSpeed dans l'inspector
     [SerializeField] private float JumpForce; //pour pouvoir modifier la valeur de JumpForce  dans l'inspector
+    [SerializeField] private float DownForce; //pour pouvoir modifier la valeur de DownForce dans l'inspector (doit etre un nombre negatif)
+
+    [SerializeField] private GameObject projectile; //pour pouvoir indiquer quel gameobject correspond à projectile dans l'inspector 
+
+    public GameObject NopeCanvas; //pour pouvoir indiquer dans l'inspector quel gameobject correspond au NopeCanvas et y acceder depuis un autre script
 
     private Inputs inputs; //on cree une variable inputs de type Inputs
     private Vector2 direction; //on cree une variable direction de type Vector2
@@ -18,7 +24,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     private Animator myAnimator; // on cree une variable pour l'animation du personnage
     private Rigidbody2D myRigidbody2D; //on cree une variable de type Rigidbody2D pour pouvoir agir ensuite sur celui du player
-    private SpriteRenderer mySpriteRenderer; // on cree une variable pour modifier le sprite qui va etre affiché pendant les animations
+    
+    public SpriteRenderer mySpriteRenderer; // on cree une variable pour modifier le sprite qui va etre affiché pendant les animations, publique pouvoir y acceder depuis un autre script
+
+    public Vector2 VecteurVisee; //on cree une variable publique pour pouvoir y acceder depuis un autre script
+
+    private int Scorevalue;
+    private int Nbcollectibles;
 
     private void OnEnable()
     {
@@ -32,6 +44,8 @@ public class PlayerBehaviour : MonoBehaviour
 
         inputs.Player.Jump.performed += OnJumpPerformed; //quand on appuie sur les inputs de l'action Jump de l'action Map player, on lance la fonction OnJumpPerformed
 
+        inputs.Player.Shoot.performed += OnShootPerformed; //quand on appuie sur les inputs de l'action Shoot de l'action Map player, on lance la fonction OnShootPerformed
+
         myAnimator = GetComponent<Animator>(); //on recupere le composant Animator du Player
         myRigidbody2D = GetComponent<Rigidbody2D>(); // on recupere le composant Rigidbody2D du Player
         mySpriteRenderer = GetComponent<SpriteRenderer>(); //on recupere le composant SpriteRenderer du Player
@@ -41,13 +55,20 @@ public class PlayerBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //on recupere le script Collectible en appelant le perso sur lequel il se trouve avec son tag attribue
+        //on recupere les variables ScoreValue et NbCollectiblesScene du script Collectibles
+        //on le fait dans l'update pour avoir toujours la bonne valeur correspondant aux variables
+        var PlayerGameObject = GameObject.FindWithTag("Player");
+        var CollectiblesScript = PlayerGameObject.GetComponent<Collectibles>();
+
+        Scorevalue = CollectiblesScript.ScoreValue;
+        Nbcollectibles = CollectiblesScript.NbCollectiblesScene;
     }
 
     /// <summary>
@@ -55,7 +76,8 @@ public class PlayerBehaviour : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        var PlayerDirection = new Vector2(direction.x, 0);
+        var PlayerDirection = new Vector2(transform.position.x, transform.position.y);
+        VecteurVisee = PlayerDirection;
 
         //Tant que la vitesse de déplacement du player n'est pas superieure à maxSpeed, on lui ajoute une force en fonction des inputs enclenchés
         if (myRigidbody2D.velocity.sqrMagnitude < MaxSpeed)
@@ -85,6 +107,11 @@ public class PlayerBehaviour : MonoBehaviour
         var isFalling = IsOnGround == false && myRigidbody2D.velocity.y < 0;
         myAnimator.SetBool("IsDescending", isFalling);
         myAnimator.SetBool("IsStanding", IsOnGround);
+
+        if(myRigidbody2D.velocity.y < 0)
+        {
+            myRigidbody2D.AddForce(transform.up * DownForce);
+        }
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
@@ -109,6 +136,11 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    private void OnShootPerformed(InputAction.CallbackContext obj)
+    {
+        Instantiate(projectile, transform.position, Quaternion.identity); //quand on enclenche l'input, l'objet reference dans projectile est instantie dans la scene
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         //si le Player collisionne avec un GameObject qui a le tag "Ground" le booléen IsOnGround passe en true pour que le Player puisse sauter
@@ -120,16 +152,34 @@ public class PlayerBehaviour : MonoBehaviour
         //si le Player collisionne avec un GameObject qui a le tag "vide" on lance la fonction GameOver
         if (other.gameObject.CompareTag("DeathZone"))
         {
-            Debug.Log("kill");
+            //Debug.Log("kill");
             GameOver();
         }
 
-        if(other.gameObject.CompareTag("Level2Launcher"))
+        //on fait en sorte que le personne ne puisse pas passer au niveau superieur s'il n'a pas ramasse tous les collectibles de la scene
+        if(other.gameObject.CompareTag("Level2Launcher") && Scorevalue == Nbcollectibles) 
         {
-            Debug.Log("level2");
-            SceneManager.LoadScene("Level2", LoadSceneMode.Single);
+            //Debug.Log("level2");
+            SceneManager.LoadScene("Level2", LoadSceneMode.Single); //si il a tout ramasse, quand il collisionne avec l'objet dont le tag est Level2Launcher, on lance le niveau 2
+            NopeCanvas.SetActive(false); //on desactive le NopeCanvas
+        }
+        else if(other.gameObject.CompareTag("Level2Launcher") && Scorevalue != Nbcollectibles)
+        {
+            NopeCanvas.SetActive(true); //si on essaye d'acceder au niveau 2 et que tous les collectibles ne sont pas ramasses, on active le NopeCanvas
+        }
+
+        //on fait en sorte que le personne ne puisse pas passer au niveau superieur s'il n'a pas ramasse tous les collectibles de la scene
+        if (other.gameObject.CompareTag("Level3Launcher") && Scorevalue == Nbcollectibles)
+        {
+            SceneManager.LoadScene("Level3", LoadSceneMode.Single); //si il a tout ramasse, quand il collisionne avec l'objet dont le tag est Level3Launcher, on lance le niveau 3
+            NopeCanvas.SetActive(false); //on desactive le NopeCanvas
+        }
+        else if (other.gameObject.CompareTag("Level3Launcher") && Scorevalue != Nbcollectibles)
+        {
+            NopeCanvas.SetActive(true); //si on essaye d'acceder au niveau 3 et que tous les collectibles ne sont pas ramasses, on active le NopeCanvas
         }
     }
+
 
     private void GameOver()
     {
