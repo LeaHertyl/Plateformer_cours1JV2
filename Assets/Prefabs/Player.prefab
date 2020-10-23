@@ -118,7 +118,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 5549291660717415864}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3029f7c65658c4a4da55da668b1ecbe0, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -150,7 +150,10 @@ MonoBehaviour:
   Speed: 400
   MaxSpeed: 70
   JumpForce: 100
+  DownForce: 0
   projectile: {fileID: 0}
+  NopeCanvas: {fileID: 0}
+  mySpriteRenderer: {fileID: 0}
   VecteurVisee: {x: 0, y: 0}
 --- !u!95 &5549291660717415814
 Animator:
@@ -184,8 +187,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: {fileID: 0}
-  NbCollectiblesScene: 0
   CanvasWin: {fileID: 0}
+  NbCollectiblesScene: 0
+  ScoreValue: 0
 --- !u!1 &5549291661476295231
 GameObject:
   m_ObjectHideFlags: 0
