@@ -167,6 +167,17 @@ public class PlayerBehaviour : MonoBehaviour
         {
             NopeCanvas.SetActive(true); //si on essaye d'acceder au niveau 2 et que tous les collectibles ne sont pas ramasses, on active le NopeCanvas
         }
+
+        //on fait en sorte que le personne ne puisse pas passer au niveau superieur s'il n'a pas ramasse tous les collectibles de la scene
+        if (other.gameObject.CompareTag("Level3Launcher") && Scorevalue == Nbcollectibles)
+        {
+            SceneManager.LoadScene("Level3", LoadSceneMode.Single); //si il a tout ramasse, quand il collisionne avec l'objet dont le tag est Level3Launcher, on lance le niveau 3
+            NopeCanvas.SetActive(false); //on desactive le NopeCanvas
+        }
+        else if (other.gameObject.CompareTag("Level3Launcher") && Scorevalue != Nbcollectibles)
+        {
+            NopeCanvas.SetActive(true); //si on essaye d'acceder au niveau 3 et que tous les collectibles ne sont pas ramasses, on active le NopeCanvas
+        }
     }
 
 

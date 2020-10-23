@@ -8,6 +8,7 @@ TagManager:
   - DeathZone
   - FlyCollectible
   - Level2Launcher
+  - Level3Launcher
   layers:
   - Default
   - TransparentFX
